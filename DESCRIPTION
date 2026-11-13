@@ -1,0 +1,14 @@
+Package: tennisage
+Type: Package
+Title: Visualize Tennis Career Matches by Player and Opponent Age
+Version: 0.1.0
+Author: Jeremy Cai
+Maintainer: Jeremy Cai <jeremycai@berkeley.edu>
+Description: Retrieves career match records from Tennis Abstract, calculates age differences for players and opponents, and plots match outcomes as a scatterplot.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends: R (>= 4.1.0)
+Imports:
+    ggplot2,
+    jsonlite
+Roxygen: list(markdown = TRUE)
