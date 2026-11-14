@@ -36,31 +36,22 @@ get_career_matches <- function(player_name) {
 #' @examples
 #' \dontrun{plot_career_ages(get_career_matches("Rafael Nadal"))}
 #' @export
+
 plot_career_ages <- function(matches) {
   required <- c("player", "player_age", "age_difference", "result")
   if (!is.data.frame(matches) || !all(required %in% names(matches)))
     stop("Provide a match data frame returned by get_career_matches().", call. = FALSE)
   if (!nrow(matches)) stop("There are no matches to plot.", call. = FALSE)
-  ggplot2::ggplot(matches, ggplot2::aes(x = player_age, y = age_difference, color = result)) +
+  
+  ggplot2::ggplot(matches, ggplot2::aes(
+    x = player_age, y = age_difference, color = result
+  )) +
     ggplot2::geom_hline(yintercept = 0, color = "grey45", linewidth = 0.5) +
     ggplot2::geom_point(alpha = 0.7, size = 1.5) +
-    ggplot2::scale_color_manual(values = c(Won = "#159bc6", Lost = "#743d9c"),
-                                breaks = c("Won", "Lost"),
-                                labels = c("Match Won by Player of Interest", "Match Lost"),
-                                name = NULL) +
-    ggplot2::scale_x_continuous(position = "top", breaks = function(x) pretty(x, n = 12)) +
-    ggplot2::scale_y_continuous(breaks = seq(-20, 20, 10),
-                                labels = c("−20", "−10", "Same age", "+10", "+20")) +
-    ggplot2::labs(title = paste(unique(matches$player)[1], "Professional Matches"),
-                  x = "Player age (years)", y = "", color = NULL) +
-    ggplot2::theme_minimal(base_size = 12) +
-    ggplot2::theme(
-      legend.position = "top",
-      legend.location = "plot",
-      legend.box.just = "center",
-      panel.grid.minor = ggplot2::element_blank(),
-      plot.title = ggplot2::element_text(face = "bold", hjust = 0.5),
-      plot.title.position = "plot",
-      axis.title.x.top = ggplot2::element_text(hjust = 0)
-    )
+    career_plot_scales() +
+    ggplot2::labs(
+      title = paste(unique(matches$player)[1], "Professional Matches"),
+      x = "Player age (years)", y = "", color = NULL
+    ) +
+    career_plot_theme()
 }
