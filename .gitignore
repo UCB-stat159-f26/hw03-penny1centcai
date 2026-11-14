@@ -3,5 +3,3 @@
 .Rproj.user/
 .Rcheck/
 *.Rcheck/
-*.tar.gz
-.DS_Store
