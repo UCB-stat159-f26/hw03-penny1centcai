@@ -11,4 +11,7 @@ Depends: R (>= 4.1.0)
 Imports:
     ggplot2,
     jsonlite
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
 Roxygen: list(markdown = TRUE)
